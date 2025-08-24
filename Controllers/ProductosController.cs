@@ -14,14 +14,12 @@ namespace Pc1_Linares.Controllers
             _context = context;
         }
 
-        // GET: Productos
         public async Task<IActionResult> Index()
         {
             var productos = await _context.ProductosCredito.ToListAsync();
             return View(productos);
         }
 
-        // GET: Productos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
@@ -34,13 +32,11 @@ namespace Pc1_Linares.Controllers
             return View(producto);
         }
 
-        // GET: Productos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Productos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre,TasaInteres,MontoMaximo,PlazoMeses")] ProductoCredito producto)
@@ -54,7 +50,7 @@ namespace Pc1_Linares.Controllers
             return View(producto);
         }
 
-        // GET: Productos/Edit/5
+     
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -65,7 +61,7 @@ namespace Pc1_Linares.Controllers
             return View(producto);
         }
 
-        // POST: Productos/Edit/5
+     
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,TasaInteres,MontoMaximo,PlazoMeses")] ProductoCredito producto)
@@ -91,7 +87,6 @@ namespace Pc1_Linares.Controllers
             return View(producto);
         }
 
-        // GET: Productos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -104,7 +99,6 @@ namespace Pc1_Linares.Controllers
             return View(producto);
         }
 
-        // POST: Productos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
