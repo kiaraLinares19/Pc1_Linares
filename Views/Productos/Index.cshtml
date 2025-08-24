@@ -1,0 +1,33 @@
+@using System.Globalization
+@model IEnumerable<Pc1_Linares.Models.ProductoCredito>
+@{
+    ViewData["Title"] = "Productos de crédito";
+    var pe = CultureInfo.GetCultureInfo("es-PE");
+}
+<h2>Productos de crédito</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>TEA</th>
+            <th>Comisión</th>
+            <th>Rango meses</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var p in Model)
+    {
+        <tr>
+            <td>@p.Nombre</td>
+            <td>@($"{p.Tea:P2}")</td>
+            <td>@($"{p.ComisionPct:P2}")</td>
+            <td>@p.MinMeses - @p.MaxMeses</td>
+            <td>
+                <a class="btn btn-primary" href="/Simulador?productId=@p.Id">Simular</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

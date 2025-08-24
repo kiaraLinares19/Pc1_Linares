@@ -1,0 +1,51 @@
+@model Pc1_Linares.Models.SimulacionViewModel
+
+@{
+    ViewData["Title"] = $"Simulador - {Model.ProductoNombre}";
+}
+
+<h2>Simulador - @Model.ProductoNombre</h2>
+
+<div class="mb-3">
+    <strong>TEA:</strong> @($"{Model.Tea:P2}") |
+    <strong>Comisión:</strong> @($"{Model.ComisionPct:P2}") |
+    <strong>Rango meses:</strong> @Model.MinMeses - @Model.MaxMeses
+</div>
+
+<form asp-action="Index" method="post" novalidate>
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="ProductId" />
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Monto" class="form-label"></label>
+        <input asp-for="Monto" class="form-control" step="0.01" />
+        <span asp-validation-for="Monto" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Meses" class="form-label"></label>
+        <input asp-for="Meses" class="form-control" />
+        <span asp-validation-for="Meses" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Calcular</button>
+    <a class="btn btn-secondary ms-2" asp-controller="Productos" asp-action="Index">Volver</a>
+</form>
+
+@if (Model.Cuota.HasValue)
+{
+    <hr />
+    <h4>Resultados</h4>
+    <ul>
+        <li><strong>TEM:</strong> @(Model.TEM.HasValue ? Model.TEM.Value.ToString("P6") : "-")</li>
+        <li><strong>Cuota mensual:</strong> S/ @Model.Cuota</li>
+        <li><strong>Comisión:</strong> S/ @Model.Comision</li>
+        <li><strong>Costo total:</strong> S/ @Model.CostoTotal</li>
+    </ul>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
